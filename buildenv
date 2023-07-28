@@ -1,0 +1,45 @@
+export ZOPEN_GIT_URL=""
+export ZOPEN_TARBALL_URL="https://archive.hadrons.org/software/libmd/libmd-1.1.0.tar.xz"
+export ZOPEN_TARBALL_DEPS="zoslib ctags automake libtool make"
+export ZOPEN_TYPE="TARBALL"
+
+zopen_check_results()
+{
+  dir="$1"
+  pfx="$2"
+  chk="$1/$2_check.log"
+
+  totalTests=$(grep '# TOTAL:' $chk | awk '{ print $3 }')
+  actualFailures=$(grep '# FAIL:' $chk | awk '{ print $3 }')
+  expectedFailures=2
+
+  # Echo the following information to gauge build health
+  echo "actualFailures:${actualFailures}"
+  echo "totalTests:${totalTests}"
+  echo "expectedFailures:${expectedFailures}"
+}
+
+zopen_append_to_env()
+{
+cat <<ZZ
+if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
+  export ZOPEN_EXTRA_CFLAGS="\${ZOPEN_EXTRA_CFLAGS} -I\$PWD/include"
+  export ZOPEN_EXTRA_CXXFLAGS="\${ZOPEN_EXTRA_CXXFLAGS} -I\$PWD/include"
+  export ZOPEN_EXTRA_LDFLAGS="\${ZOPEN_EXTRA_LDFLAGS} -L\$PWD/lib"
+  export ZOPEN_EXTRA_LIBS="\${ZOPEN_EXTRA_LIBS} -lmd"
+fi
+ZZ
+
+}
+
+zopen_append_to_setup()
+{
+  # echo commands that will run when installing via setup.sh
+}
+
+zopen_get_version()
+{
+  # Modify to echo the version of your tool/library
+  # Rather than hardcoding the version, obtain the version by running the tool/library
+  echo "1.0.0"
+}
