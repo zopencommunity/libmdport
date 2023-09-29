@@ -1,7 +1,12 @@
-export ZOPEN_GIT_URL=""
-export ZOPEN_TARBALL_URL="https://archive.hadrons.org/software/libmd/libmd-1.1.0.tar.xz"
-export ZOPEN_TARBALL_DEPS="zoslib ctags automake libtool make"
+export ZOPEN_GIT_URL="https://github.com/guillemj/libmd.git"
+export ZOPEN_GIT_DEPS="git make m4 autoconf perl libtool automake bash zoslib tar sed coreutils"
+VERSION="1.1.0"
+export ZOPEN_TARBALL_URL="https://archive.hadrons.org/software/libmd/libmd-$VERSION.tar.xz"
+export ZOPEN_TARBALL_DEPS="zoslib ctags automake libtool make sed coreutils"
+export ZOPEN_COMP="clang"
 export ZOPEN_TYPE="TARBALL"
+
+#export ZOPEN_BOOTSTRAP="./autogen"
 
 zopen_check_results()
 {
@@ -29,7 +34,6 @@ if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
   export ZOPEN_EXTRA_LIBS="\${ZOPEN_EXTRA_LIBS} -lmd"
 fi
 ZZ
-
 }
 
 zopen_append_to_setup()
@@ -41,5 +45,5 @@ zopen_get_version()
 {
   # Modify to echo the version of your tool/library
   # Rather than hardcoding the version, obtain the version by running the tool/library
-  echo "1.0.0"
+  echo "$VERSION"
 }
