@@ -2,6 +2,7 @@
 LIBMD_VERSION="1.1.0"
 
 export ZOPEN_BUILD_LINE="STABLE"
+export ZOPEN_CATEGORIES="security"
 export ZOPEN_DEV_URL="https://github.com/guillemj/libmd.git"
 export ZOPEN_DEV_DEPS="git make m4 autoconf perl libtool automake bash zoslib tar sed coreutils"
 export ZOPEN_STABLE_URL="https://archive.hadrons.org/software/libmd/libmd-$LIBMD_VERSION.tar.xz"
